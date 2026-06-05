@@ -24,7 +24,8 @@
                 </div>
             </div>
             <nav class="app-tabs">
-                <button class="tab-btn active" id="tab-calc-btn" onclick="switchTab('calculadora')">🧮 Calculadora de Splines</button>
+                <button class="tab-btn active" id="tab-calc-btn" onclick="switchTab('calculadora')">🧮 Calculadora de
+                    Splines</button>
                 <button class="tab-btn" id="tab-apps-btn" onclick="switchTab('aplicaciones')">🚀 Aplicaciones</button>
             </nav>
         </header>
@@ -159,9 +160,12 @@
             <section id="tab-aplicaciones" class="tab-section">
                 <!-- Barra de Navegación de Sub-Aplicaciones -->
                 <div class="apps-nav-bar">
-                    <button class="app-sub-btn active" id="btn-sub-dron" onclick="switchSubApp('dron')">🛸 Navegación de Dron</button>
-                    <button class="app-sub-btn" id="btn-sub-coaster" onclick="switchSubApp('coaster')">🎢 Montaña Rusa</button>
-                    <button class="app-sub-btn" id="btn-sub-clima" onclick="switchSubApp('clima')">🌡️ Modelado de Clima</button>
+                    <button class="app-sub-btn active" id="btn-sub-dron" onclick="switchSubApp('dron')">🛸 Navegación de
+                        Dron</button>
+                    <button class="app-sub-btn" id="btn-sub-coaster" onclick="switchSubApp('coaster')">🎢 Montaña
+                        Rusa</button>
+                    <button class="app-sub-btn" id="btn-sub-clima" onclick="switchSubApp('clima')">🌡️ Modelado de
+                        Clima</button>
                 </div>
 
                 <!-- 1. CASO DE ESTUDIO: NAVEGACIÓN DE DRON -->
@@ -178,12 +182,14 @@
                                 </select>
                             </div>
                             <div class="control-group buttons">
-                                <button class="btn btn-success" id="btn-drone-start" onclick="toggleDroneFlight()">▶ Iniciar Vuelo</button>
+                                <button class="btn btn-success" id="btn-drone-start" onclick="toggleDroneFlight()">▶
+                                    Iniciar Vuelo</button>
                                 <button class="btn btn-secondary" onclick="resetDroneFlight()">🔄 Reiniciar</button>
                             </div>
                             <div class="control-group slider-group">
                                 <label for="drone-speed-slider">⚡ Velocidad:</label>
-                                <input type="range" id="drone-speed-slider" min="1" max="5" value="3" onchange="updateDroneSpeed()">
+                                <input type="range" id="drone-speed-slider" min="1" max="5" value="3"
+                                    onchange="updateDroneSpeed()">
                             </div>
                             <div class="telemetry-hud">
                                 <div class="hud-item">
@@ -224,7 +230,8 @@
                                     <canvas id="drone-vel-canvas"></canvas>
                                 </div>
                                 <div class="sub-canvas-box">
-                                    <span class="canvas-title">Aceleración Vertical: y''(x) [Continua por Tramos - C²]</span>
+                                    <span class="canvas-title">Aceleración Vertical: y''(x) [Continua por Tramos -
+                                        C²]</span>
                                     <canvas id="drone-acc-canvas"></canvas>
                                 </div>
                             </div>
@@ -240,15 +247,25 @@
                             <div class="explanation-grid">
                                 <div class="exp-col">
                                     <h3>¿Por qué no usar líneas rectas (Lineal)?</h3>
-                                    <p>Si el dron uniera los puntos con líneas rectas, en cada nodo la velocidad en el eje Y sufriría un cambio instantáneo (salto discreto). Esto requeriría una fuerza infinita instantánea para que los motores cambiaran de sentido, provocando vibraciones dañinas y trayectorias inestables.</p>
+                                    <p>Si el dron uniera los puntos con líneas rectas, en cada nodo la velocidad en el
+                                        eje Y sufriría un cambio instantáneo (salto discreto). Esto requeriría una
+                                        fuerza infinita instantánea para que los motores cambiaran de sentido,
+                                        provocando vibraciones dañinas y trayectorias inestables.</p>
                                 </div>
                                 <div class="exp-col">
                                     <h3>¿Por qué no usar Splines Cuadráticas?</h3>
-                                    <p>Las splines cuadráticas garantizan que la velocidad sea continua, pero la aceleración (segunda derivada) tendría saltos de discontinuidad (escalones). En física, la aceleración es directamente proporcional a la fuerza motora (F = m · a). Un salto brusco de aceleración significa que el dron tendría sacudidas mecánicas instantáneas en cada nódulo.</p>
+                                    <p>Las splines cuadráticas garantizan que la velocidad sea continua, pero la
+                                        aceleración (segunda derivada) tendría saltos de discontinuidad (escalones). En
+                                        física, la aceleración es directamente proporcional a la fuerza motora (F = m ·
+                                        a). Un salto brusco de aceleración significa que el dron tendría sacudidas
+                                        mecánicas instantáneas en cada nódulo.</p>
                                 </div>
                                 <div class="exp-col highlighted">
                                     <h3>La Excelencia de las Splines Cúbicas Naturales</h3>
-                                    <p>Al modelar con polinomios de grado 3, garantizamos continuidad tanto en la primera derivada (velocidad y') como en la segunda derivada (aceleración y''). Esto se traduce en un vuelo físicamente fluido (suavidad C²). El dron puede navegar sin sacudidas ni esfuerzos mecánicos violentos.</p>
+                                    <p>Al modelar con polinomios de grado 3, garantizamos continuidad tanto en la
+                                        primera derivada (velocidad y') como en la segunda derivada (aceleración y'').
+                                        Esto se traduce en un vuelo físicamente fluido (suavidad C²). El dron puede
+                                        navegar sin sacudidas ni esfuerzos mecánicos violentos.</p>
                                 </div>
                             </div>
                         </div>
@@ -268,8 +285,10 @@
                                 </select>
                             </div>
                             <div class="control-group buttons">
-                                <button class="btn btn-success" id="btn-coaster-start" onclick="toggleCoasterAnimation()">▶ Iniciar Recorrido</button>
-                                <button class="btn btn-secondary" onclick="resetCoasterAnimation()">🔄 Reiniciar</button>
+                                <button class="btn btn-success" id="btn-coaster-start"
+                                    onclick="toggleCoasterAnimation()">▶ Iniciar Recorrido</button>
+                                <button class="btn btn-secondary" onclick="resetCoasterAnimation()">🔄
+                                    Reiniciar</button>
                             </div>
                             <div class="telemetry-hud">
                                 <div class="hud-item">
@@ -314,7 +333,8 @@
                                     <canvas id="coaster-g-canvas"></canvas>
                                 </div>
                                 <div class="sub-canvas-box">
-                                    <span class="canvas-title">Jerk (Derivada de la Aceleración: y''') [C² asegura Jerk Finito]</span>
+                                    <span class="canvas-title">Jerk (Derivada de la Aceleración: y''') [C² asegura Jerk
+                                        Finito]</span>
                                     <canvas id="coaster-jerk-canvas"></canvas>
                                 </div>
                             </div>
@@ -330,15 +350,32 @@
                             <div class="explanation-grid">
                                 <div class="exp-col">
                                     <h3>Modelado de Curvatura y Fuerza G</h3>
-                                    <p>En la simulación, los splines cúbicos definen la pista mediante ecuaciones paramétricas locales donde la primera y segunda derivada (y' e y'') son completamente continuas. Esto permite calcular con precisión la curvatura física de la vía en cada punto: κ = y'' / (1 + (y')²)<sup>1.5</sup>. Gracias a esta continuidad matemática, la Fuerza G centrípeta sentida por los pasajeros evoluciona de forma totalmente suave y progresiva a lo largo de la animación, evitando sacudidas.</p>
+                                    <p>En la simulación, los splines cúbicos definen la pista mediante ecuaciones
+                                        paramétricas locales donde la primera y segunda derivada (y' e y'') son
+                                        completamente continuas. Esto permite calcular con precisión la curvatura física
+                                        de la vía en cada punto: κ = y'' / (1 + (y')²)<sup>1.5</sup>. Gracias a esta
+                                        continuidad matemática, la Fuerza G centrípeta sentida por los pasajeros
+                                        evoluciona de forma totalmente suave y progresiva a lo largo de la animación,
+                                        evitando sacudidas.</p>
                                 </div>
                                 <div class="exp-col">
                                     <h3>Cálculo de Jerk Finito (Continuidad C²)</h3>
-                                    <p>El Jerk representa la variación de aceleración en el tiempo y corresponde a la tercera derivada (y'''). Al usar polinomios de tercer grado para cada tramo del spline, su segunda derivada y'' es lineal, lo que hace que y''' sea una constante finita en cada tramo. La continuidad C² asegura que no existan discontinuidades en la aceleración al pasar de un tramo a otro, evitando picos de Jerk infinito que simularían un latigazo (whiplash) destructivo.</p>
+                                    <p>El Jerk representa la variación de aceleración en el tiempo y corresponde a la
+                                        tercera derivada (y'''). Al usar polinomios de tercer grado para cada tramo del
+                                        spline, su segunda derivada y'' es lineal, lo que hace que y''' sea una
+                                        constante finita en cada tramo. La continuidad C² asegura que no existan
+                                        discontinuidades en la aceleración al pasar de un tramo a otro, evitando picos
+                                        de Jerk infinito que simularían un latigazo (whiplash) destructivo.</p>
                                 </div>
                                 <div class="exp-col highlighted">
                                     <h3>Integración de Física en la Simulación</h3>
-                                    <p>Tener ecuaciones diferenciables continuas para la pista permite resolver de forma estable el movimiento del carrito. Usamos la pendiente local y' para descomponer el vector de velocidad (basado en la conservación de la energía v = √(v<sub>inicio</sub>² + 2 · g · (h<sub>inicio</sub> - h))) e integrar la posición paso a paso (dx = ds / √(1 + (y')²)). Esto hace posible graficar la telemetría en tiempo real sin el ruido numérico que rompería la física si usáramos tramos rectos.</p>
+                                    <p>Tener ecuaciones diferenciables continuas para la pista permite resolver de forma
+                                        estable el movimiento del carrito. Usamos la pendiente local y' para descomponer
+                                        el vector de velocidad (basado en la conservación de la energía v =
+                                        √(v<sub>inicio</sub>² + 2 · g · (h<sub>inicio</sub> - h))) e integrar la
+                                        posición paso a paso (dx = ds / √(1 + (y')²)). Esto hace posible graficar la
+                                        telemetría en tiempo real sin el ruido numérico que rompería la física si
+                                        usáramos tramos rectos.</p>
                                 </div>
                             </div>
                         </div>
@@ -357,27 +394,37 @@
                                     <option value="3">3. Estabilidad de Microclima</option>
                                 </select>
                             </div>
-                            <div class="control-group checkboxes" style="display: flex; gap: 1rem; align-items: center;">
-                                <label class="switch-container" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <div class="control-group checkboxes"
+                                style="display: flex; gap: 1rem; align-items: center;">
+                                <label class="switch-container"
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                                     <label class="switch">
-                                        <input type="checkbox" id="show-weather-linear" checked onchange="drawWeather()">
+                                        <input type="checkbox" id="show-weather-linear" checked
+                                            onchange="drawWeather()">
                                         <span class="slider"></span>
                                     </label>
                                     <span class="checkbox-label">Lineal (C⁰)</span>
                                 </label>
-                                <label class="switch-container" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <label class="switch-container"
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                                     <label class="switch">
-                                        <input type="checkbox" id="show-weather-lagrange" checked onchange="drawWeather()">
-                                        <span class="slider" style="background-color: var(--bg-input); border-color: var(--danger);"></span>
+                                        <input type="checkbox" id="show-weather-lagrange" checked
+                                            onchange="drawWeather()">
+                                        <span class="slider"
+                                            style="background-color: var(--bg-input); border-color: var(--danger);"></span>
                                     </label>
                                     <span class="checkbox-label" style="color: var(--danger);">Lagrange (Global)</span>
                                 </label>
-                                <label class="switch-container" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <label class="switch-container"
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                                     <label class="switch">
-                                        <input type="checkbox" id="show-weather-spline" checked onchange="drawWeather()">
-                                        <span class="slider" style="background-color: var(--bg-input); border-color: var(--success);"></span>
+                                        <input type="checkbox" id="show-weather-spline" checked
+                                            onchange="drawWeather()">
+                                        <span class="slider"
+                                            style="background-color: var(--bg-input); border-color: var(--success);"></span>
                                     </label>
-                                    <span class="checkbox-label" style="color: var(--success);">Spline Cúbico (C²)</span>
+                                    <span class="checkbox-label" style="color: var(--success);">Spline Cúbico
+                                        (C²)</span>
                                 </label>
                             </div>
                         </div>
@@ -424,15 +471,25 @@
                             <div class="explanation-grid">
                                 <div class="exp-col">
                                     <h3>El Fenómeno de Runge</h3>
-                                    <p>Al intentar interpolar N puntos usando un único polinomio global de Lagrange de grado N - 1, la curva tiende a oscilar violentamente cerca de los extremos. Esto ocurre porque las derivadas de alto orden crecen de forma descontrolada, haciendo que el modelo sea inútil para la predicción de datos como la temperatura.</p>
+                                    <p>Al intentar interpolar N puntos usando un único polinomio global de Lagrange de
+                                        grado N - 1, la curva tiende a oscilar violentamente cerca de los extremos. Esto
+                                        ocurre porque las derivadas de alto orden crecen de forma descontrolada,
+                                        haciendo que el modelo sea inútil para la predicción de datos como la
+                                        temperatura.</p>
                                 </div>
                                 <div class="exp-col">
                                     <h3>Estabilidad por Tramos</h3>
-                                    <p>Las splines cúbicas resuelven este problema dividiendo el dominio en intervalos locales y uniendo polinomios de grado 3. Al restringir el grado local, eliminamos por completo las oscilaciones catastróficas de Runge, manteniendo el comportamiento del modelo estable y suave.</p>
+                                    <p>Las splines cúbicas resuelven este problema dividiendo el dominio en intervalos
+                                        locales y uniendo polinomios de grado 3. Al restringir el grado local,
+                                        eliminamos por completo las oscilaciones catastróficas de Runge, manteniendo el
+                                        comportamiento del modelo estable y suave.</p>
                                 </div>
                                 <div class="exp-col highlighted">
                                     <h3>Comparación en Climatología</h3>
-                                    <p>La interpolación lineal (C⁰) crea transiciones de tasa de cambio abruptas ("picos" no realistas). El polinomio de Lagrange introduce picos absurdos bajo cero o sobrecalentamientos ficticios en los extremos. La spline cúbica natural ofrece la representación física más realista del ciclo térmico diario.</p>
+                                    <p>La interpolación lineal (C⁰) crea transiciones de tasa de cambio abruptas
+                                        ("picos" no realistas). El polinomio de Lagrange introduce picos absurdos bajo
+                                        cero o sobrecalentamientos ficticios en los extremos. La spline cúbica natural
+                                        ofrece la representación física más realista del ciclo térmico diario.</p>
                                 </div>
                             </div>
                         </div>
