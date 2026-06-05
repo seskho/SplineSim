@@ -329,16 +329,16 @@
                         <div class="card-body">
                             <div class="explanation-grid">
                                 <div class="exp-col">
-                                    <h3>Suavidad de Fuerzas G y Curvatura</h3>
-                                    <p>El gran beneficio de usar splines cúbicos es que garantizan una <b>curvatura completamente continua</b> en todo el trayecto. Al suavizar las transiciones entre subidas, bajadas y bucles, las fuerzas centrípetas y las Fuerzas G que sienten los pasajeros cambian de forma progresiva. Si se usaran uniones lineales o parabólicas simples, la curvatura sufriría saltos toscos, sometiendo a los pasajeros a impactos instantáneos muy incómodos.</p>
+                                    <h3>Modelado de Curvatura y Fuerza G</h3>
+                                    <p>En la simulación, los splines cúbicos definen la pista mediante ecuaciones paramétricas locales donde la primera y segunda derivada (y' e y'') son completamente continuas. Esto permite calcular con precisión la curvatura física de la vía en cada punto: κ = y'' / (1 + (y')²)<sup>1.5</sup>. Gracias a esta continuidad matemática, la Fuerza G centrípeta sentida por los pasajeros evoluciona de forma totalmente suave y progresiva a lo largo de la animación, evitando sacudidas.</p>
                                 </div>
                                 <div class="exp-col">
-                                    <h3>Prevención del Latigazo Cervical (Jerk Finito)</h3>
-                                    <p>La ventaja crítica de la <b>continuidad de aceleración (C²)</b> que ofrecen los splines cúbicos es que mantienen la sacudida (Jerk) dentro de límites seguros y finitos. En diseños con splines cuadráticas, los saltos bruscos de aceleración generarían picos infinitos de sacudida. En el mundo real, esto causaría el peligroso efecto de "latigazo" (whiplash) en el cuello de los pasajeros y daños estructurales severos por fatiga en las vías de acero.</p>
+                                    <h3>Cálculo de Jerk Finito (Continuidad C²)</h3>
+                                    <p>El Jerk representa la variación de aceleración en el tiempo y corresponde a la tercera derivada (y'''). Al usar polinomios de tercer grado para cada tramo del spline, su segunda derivada y'' es lineal, lo que hace que y''' sea una constante finita en cada tramo. La continuidad C² asegura que no existan discontinuidades en la aceleración al pasar de un tramo a otro, evitando picos de Jerk infinito que simularían un latigazo (whiplash) destructivo.</p>
                                 </div>
                                 <div class="exp-col highlighted">
-                                    <h3>Simulación y Seguridad de la Trayectoria</h3>
-                                    <p>Al modelar la pista mediante splines cúbicos, los ingenieros pueden predecir con precisión la velocidad por conservación de energía y las fuerzas resultantes en cada milímetro de la vía antes de construirla. Esto permite optimizar las pendientes para asegurar que el carro complete el circuito con suficiente inercia, pero garantizando que las aceleraciones negativas y positivas se mantengan en rangos seguros para el cuerpo humano.</p>
+                                    <h3>Integración de Física en la Simulación</h3>
+                                    <p>Tener ecuaciones diferenciables continuas para la pista permite resolver de forma estable el movimiento del carrito. Usamos la pendiente local y' para descomponer el vector de velocidad (basado en la conservación de la energía v = √(v<sub>inicio</sub>² + 2 · g · (h<sub>inicio</sub> - h))) e integrar la posición paso a paso (dx = ds / √(1 + (y')²)). Esto hace posible graficar la telemetría en tiempo real sin el ruido numérico que rompería la física si usáramos tramos rectos.</p>
                                 </div>
                             </div>
                         </div>
