@@ -202,6 +202,12 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .main-visuals {
     display: flex;
     flex-direction: column;
@@ -331,6 +337,7 @@ body {
     flex-direction: column;
     gap: 0.25rem;
     flex: 1;
+    min-width: 0;
 }
 
 .input-group.full {
@@ -344,6 +351,7 @@ body {
 }
 
 .input-group input {
+    width: 100%;
     background-color: var(--bg-input);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
