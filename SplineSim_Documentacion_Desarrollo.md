@@ -62,7 +62,6 @@ El carrito de la montaña rusa se modela como una partícula que se desliza sin 
 
 ### Componentes Clave del Software
 1. **Motor de Splines Cúbicos Naturales (Math Engine):**
-   - **En Python ([TB1_Final.py](./TB1_Final.py#L47-L95)):** Utiliza `numpy` para resolver el sistema matricial tridiagonal mediante `np.linalg.solve`.
    - **En JavaScript ([script.js](./js/script.js#L100-L215)):** Implementa la deducción matemática completa desde cero, construyendo la matriz tridiagonal $M$, el vector $b$, y resolviéndolo mediante eliminación Gaussiana con pivoteo parcial.
 2. **Solver Lineal Custom (`solveLinearSystem` en [script.js](./js/script.js#L100-L154)):**
    - Implementa la eliminación Gaussiana con pivoteo parcial de manera robusta directamente en JavaScript para evitar indeterminaciones.
@@ -120,27 +119,17 @@ const WEATHER_DB = {
 
 ## 🛠️ 3. Pasos para Despliegue / Pruebas Locales
 
-### Opción A: Aplicación de Escritorio en Python (Tkinter + Matplotlib)
-1. Requisitos: Python 3.8 o superior instalado en el sistema.
-2. Instalar dependencias científicas:
-   ```bash
-   pip install numpy matplotlib
-   ```
-3. Ejecutar la aplicación interactiva de escritorio:
-   ```bash
-   python TB1_Final.py
-   ```
+La aplicación es un sitio web estático. Para probarla localmente:
 
-### Opción B: Aplicación Web en el Navegador
-1. Levanta un servidor web liviano en el directorio raíz del proyecto:
+1. Levanta un servidor web en el directorio raíz del proyecto:
    ```bash
-   # Opción 1: Python
+   # Con Python (servidor HTTP estático)
    python -m http.server 5500
    
-   # Opción 2: Node.js (serve)
+   # O con Node.js
    npx serve .
    ```
-2. Abre tu navegador web e ingresa a `http://localhost:5500`.
+2. Abre tu navegador web e ingresa a `http://localhost:5500` (o el puerto indicado por el servidor).
 
 ---
 
