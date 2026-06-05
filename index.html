@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Splines Cúbicos & Simulador de Drones | UPC Álgebra Lineal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-logo">
+                <span class="logo-icon">🛸</span>
+                <div class="logo-text">
+                    <h1>SplineFly</h1>
+                    <p>Álgebra Lineal • UPC 2026</p>
+                </div>
+            </div>
+            <nav class="app-tabs">
+                <button class="tab-btn active" id="tab-calc-btn" onclick="switchTab('calculadora')">🧮 Calculadora de
+                    Splines</button>
+                <button class="tab-btn" id="tab-drone-btn" onclick="switchTab('simulador')">⚡ Simulador de Dron</button>
+            </nav>
+        </header>
+
+        <main class="app-content">
+
+            <section id="tab-calculadora" class="tab-section active">
+                <div class="layout-grid">
+                    <aside class="control-panel">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-icon">📍</span>
+                                <h2>Puntos de Control</h2>
+                            </div>
+                            <div class="card-body">
+                                <p class="help-text">Haz doble clic en el gráfico de la derecha para añadir un punto, o
+                                    arrastra un punto para cambiar su altura Y.</p>
+                                <div class="inline-form">
+                                    <div class="input-group">
+                                        <label for="point-x">X</label>
+                                        <input type="number" id="point-x" step="0.1" placeholder="Ej. 2">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="point-y">Y</label>
+                                        <input type="number" id="point-y" step="0.1" placeholder="Ej. 3">
+                                    </div>
+                                    <button class="btn btn-primary" onclick="addPointManual()">Añadir</button>
+                                </div>
+
+                                <div class="table-container">
+                                    <table id="points-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nódulo</th>
+                                                <th>Coord X</th>
+                                                <th>Coord Y</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="button-row">
+                                    <button class="btn btn-danger" onclick="clearAllPoints()">Limpiar Todo</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-icon">🎨</span>
+                                <h2>Opciones de Visualización</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="checkbox-group">
+                                    <label class="switch">
+                                        <input type="checkbox" id="show-spline-check" checked
+                                            onchange="drawCalculator()">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="checkbox-label">Mostrar Spline Cúbico (Azul)</span>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="switch">
+                                        <input type="checkbox" id="show-lagrange-check" checked
+                                            onchange="drawCalculator()">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="checkbox-label">Comparar con Lagrange (Rojo)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-icon">🔍</span>
+                                <h2>Evaluadora de Puntos</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="inline-form">
+                                    <div class="input-group full">
+                                        <label for="eval-x">Evaluar en X</label>
+                                        <input type="number" id="eval-x" step="0.05" value="5.0"
+                                            oninput="evaluateCustomX()">
+                                    </div>
+                                </div>
+                                <div class="evaluation-results">
+                                    <div class="res-item main">
+                                        <span class="res-label">Altura Interpolada (y)</span>
+                                        <span class="res-value" id="eval-res-y">--</span>
+                                    </div>
+                                    <div class="res-item">
+                                        <span class="res-label">Velocidad / Pendiente (y')</span>
+                                        <span class="res-value" id="eval-res-dy">--</span>
+                                    </div>
+                                    <div class="res-item">
+                                        <span class="res-label">Aceleración / Curvatura (y'')</span>
+                                        <span class="res-value" id="eval-res-ddy">--</span>
+                                    </div>
+                                    <div class="res-item equation">
+                                        <span class="res-label">Ecuación de Tramo</span>
+                                        <div class="res-equation-box" id="eval-res-equation">--</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <section class="main-visuals">
+                        <div class="card canvas-card">
+                            <div class="canvas-wrapper">
+                                <canvas id="calculator-canvas"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card math-card">
+                            <div class="card-header">
+                                <span class="card-icon">📝</span>
+                                <h2>Desglose de Álgebra Lineal Paso a Paso</h2>
+                            </div>
+                            <div class="card-body">
+                                <pre id="math-derivation-output"
+                                    class="code-block">Esperando suficientes puntos...</pre>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section id="tab-simulador" class="tab-section">
+                <div class="card drone-controls-card">
+                    <div class="drone-top-bar">
+                        <div class="control-group">
+                            <label for="mission-select">📍 Seleccionar Misión:</label>
+                            <select id="mission-select" onchange="loadSelectedMission()">
+                                <option value="1">1. Evasión de Obstáculos (Paso Suave)</option>
+                                <option value="2">2. Patrón de Inspección Agrícola (Zig-Zag)</option>
+                                <option value="3">3. Circuito de Entrega Rápida</option>
+                                <option value="custom">Ruta Personalizada (de Pestaña 1)</option>
+                            </select>
+                        </div>
+                        <div class="control-group buttons">
+                            <button class="btn btn-success" id="btn-drone-start" onclick="toggleDroneFlight()">▶ Iniciar
+                                Vuelo</button>
+                            <button class="btn btn-secondary" onclick="resetDroneFlight()">🔄 Reiniciar</button>
+                        </div>
+                        <div class="control-group slider-group">
+                            <label for="drone-speed-slider">⚡ Velocidad:</label>
+                            <input type="range" id="drone-speed-slider" min="1" max="5" value="3"
+                                onchange="updateDroneSpeed()">
+                        </div>
+                        <div class="telemetry-hud">
+                            <div class="hud-item">
+                                <span class="hud-lbl">POS</span>
+                                <span class="hud-val" id="hud-pos">X: 0.00, Y: 0.00</span>
+                            </div>
+                            <div class="hud-item">
+                                <span class="hud-lbl">VEL Y'</span>
+                                <span class="hud-val" id="hud-vel">0.00 m/s</span>
+                            </div>
+                            <div class="hud-item">
+                                <span class="hud-lbl">ACEL Y''</span>
+                                <span class="hud-val" id="hud-acc">0.00 m/s²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-grid split-50">
+                    <div class="card canvas-card">
+                        <div class="card-header">
+                            <span class="card-icon">🗺️</span>
+                            <h2>Mapa de Vuelo y Obstáculos</h2>
+                        </div>
+                        <div class="canvas-wrapper">
+                            <canvas id="drone-map-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card canvas-card">
+                        <div class="card-header">
+                            <span class="card-icon">📈</span>
+                            <h2>Análisis de Continuidad Cinemática (C¹ y C²)</h2>
+                        </div>
+                        <div class="canvas-wrapper flex-column">
+                            <div class="sub-canvas-box">
+                                <span class="canvas-title">Velocidad Vertical: y'(x) [Continua y Suave - C¹]</span>
+                                <canvas id="drone-vel-canvas"></canvas>
+                            </div>
+                            <div class="sub-canvas-box">
+                                <span class="canvas-title">Aceleración Vertical: y''(x) [Continua por Tramos -
+                                    C²]</span>
+                                <canvas id="drone-acc-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card explanation-card">
+                    <div class="card-header">
+                        <span class="card-icon">🧠</span>
+                        <h2>Física de Trayectorias y Álgebra Lineal en Robótica</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="explanation-grid">
+                            <div class="exp-col">
+                                <h3>¿Por qué no usar líneas rectas (Lineal)?</h3>
+                                <p>Si el dron uniera los puntos con líneas rectas, en cada nodo la velocidad en el eje Y
+                                    sufriría un cambio instantáneo (salto discreto). Esto requeriría una fuerza infinita
+                                    instantánea para que los motores cambiaran de sentido, provocando vibraciones
+                                    dañinas y trayectorias inestables.</p>
+                            </div>
+                            <div class="exp-col">
+                                <h3>¿Por qué no usar Splines Cuadráticas?</h3>
+                                <p>Las splines cuadráticas garantizan que la velocidad sea continua, pero la aceleración
+                                    (segunda derivada) tendría saltos de discontinuidad (escalones). En física, la
+                                    aceleración es directamente proporcional a la fuerza motora ($F = m \cdot a$). Un
+                                    salto brusco de aceleración significa que el dron tendría sacudidas mecánicas
+                                    instantáneas en cada nódulo.</p>
+                            </div>
+                            <div class="exp-col highlighted">
+                                <h3>La Excelencia de las Splines Cúbicas Naturales</h3>
+                                <p>Al modelar con polinomios de grado 3, garantizamos continuidad tanto en la primera
+                                    derivada (velocidad $y'$) como en la segunda derivada (aceleración $y''$). Esto se
+                                    traduce en un vuelo físicamente fluido (suavidad $C^2$). El dron puede navegar sin
+                                    sacudidas ni esfuerzos mecánicos violentos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="app-footer-bar">
+            <p>Álgebra Lineal • Trabajo Grupal 1 (Hito Final) • Universidad Peruana de Ciencias Aplicadas</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
