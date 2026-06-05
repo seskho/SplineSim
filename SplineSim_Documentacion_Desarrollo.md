@@ -61,9 +61,12 @@ El carrito de la montaña rusa se modela como una partícula que se desliza sin 
 ---
 
 ### Componentes Clave del Software
-1. **Math Engine (Deducción y Solver):**
-   - **En JavaScript ([script.js](file:///c:/Users/franc/OneDrive/Escritorio/Upc/2026-1/AlgebraLineal/js/script.js#L100-L215)):** Calcula las distancias locales $h_k$, arma el sistema lineal tridiagonal $M \cdot g = b$ y lo resuelve usando **Eliminación Gaussiana con Pivoteo Parcial** para máxima estabilidad numérica.
-2. **Telemetría y Gráficos Dinámicos (Canvas 2D):**
+1. **Motor de Splines Cúbicos Naturales (Math Engine):**
+   - **En Python ([TB1_Final.py](./TB1_Final.py#L47-L95)):** Utiliza `numpy` para resolver el sistema matricial tridiagonal mediante `np.linalg.solve`.
+   - **En JavaScript ([script.js](./js/script.js#L100-L215)):** Implementa la deducción matemática completa desde cero, construyendo la matriz tridiagonal $M$, el vector $b$, y resolviéndolo mediante eliminación Gaussiana con pivoteo parcial.
+2. **Solver Lineal Custom (`solveLinearSystem` en [script.js](./js/script.js#L100-L154)):**
+   - Implementa la eliminación Gaussiana con pivoteo parcial de manera robusta directamente en JavaScript para evitar indeterminaciones.
+3. **Telemetría y Gráficos Dinámicos (Canvas 2D):**
    - **Mapa de Simulación:** Representación animada del dron y del carro de montaña rusa recorriendo el spline en tiempo real.
    - **Monitoreo Cinemático:** Gráficas sincronizadas de velocidad, aceleración, fuerzas G y Jerk que se actualizan de forma continua para verificar empíricamente la suavidad física del spline cúbico natural.
 
@@ -71,7 +74,7 @@ El carrito de la montaña rusa se modela como una partícula que se desliza sin 
 
 ## 🗄️ 2. Estructura de Datos / Modelo de Datos
 
-Los datos de control y configuración de las simulaciones están centralizados en bases de datos en memoria en [script.js](file:///c:/Users/franc/OneDrive/Escritorio/Upc/2026-1/AlgebraLineal/js/script.js).
+Los datos de control y configuración de las simulaciones están centralizados en bases de datos en memoria en [script.js](./js/script.js).
 
 ### Esquema de Misiones de Drones (`MISIONES_DB`)
 ```javascript
@@ -145,7 +148,7 @@ const WEATHER_DB = {
 
 ### Problema 1: Inestabilidad y División por Cero en el Solver de JavaScript
 * **Detalle:** La eliminación gaussiana original fallaba cuando un pivote en la diagonal principal de $M$ era cercano a cero, arrojando coeficientes `NaN` y rompiendo el renderizado.
-* **Solución:** Se implementó **Pivoteo Parcial** en la función `solveLinearSystem` de [script.js](file:///c:/Users/franc/OneDrive/Escritorio/Upc/2026-1/AlgebraLineal/js/script.js#L100) para reordenar las filas buscando el mayor valor absoluto en la columna del pivote.
+* **Solución:** Se implementó **Pivoteo Parcial** en la función `solveLinearSystem` de [script.js](./js/script.js#L100) para reordenar las filas buscando el mayor valor absoluto en la columna del pivote.
 
 ### Problema 2: El Dron Colisionaba con los Obstáculos en la Misión 1
 * **Detalle:** En la misión de evasión de obstáculos, el tercer obstáculo de techo estaba ubicado en $y = 5.8$. La trayectoria del spline cúbico pasaba a $y \approx 5.4$, provocando que el dron atravesara el obstáculo.
@@ -153,7 +156,7 @@ const WEATHER_DB = {
 
 ### Problema 3: Pérdida de Escala en los Gráficos de Análisis al Reiniciar
 * **Detalle:** Al iniciar simulaciones consecutivas o con valores muy altos, el zoom automático de los gráficos cinemáticos y de montaña rusa se descalibraba, impidiendo retornar a la vista inicial y mostrando curvas fuera del viewport del canvas.
-* **Solución:** Se implementó una lógica de reseteo explícito de las variables de escala cinemática y límites de animación en las funciones `resetDroneFlight()` y `resetCoasterAnimation()` en [script.js](file:///c:/Users/franc/OneDrive/Escritorio/Upc/2026-1/AlgebraLineal/js/script.js#L644).
+* **Solución:** Se implementó una lógica de reseteo explícito de las variables de escala cinemática y límites de animación en las funciones `resetDroneFlight()` and `resetCoasterAnimation()` en [script.js](./js/script.js#L644).
 
 ---
 
