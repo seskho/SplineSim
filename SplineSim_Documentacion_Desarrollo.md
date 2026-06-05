@@ -1,14 +1,14 @@
-# SplineFly - Calculadora de Splines Cúbicos & Simulador de Drones
+# SplineSim - Calculadora de Splines Cúbicos & Simulador Multi-Aplicación
 **Fecha:** 3 de Junio de 2026 | **Ciclo:** 2026-1
 
 ## 📌 1. Arquitectura y Lógica Implementada
 
 ### Descripción
-El proyecto **SplineFly** es una suite interactiva dual (Desktop Python Tkinter y Web HTML5/Canvas/JS) diseñada para resolver el problema clásico de la planificación de trayectorias suaves en robótica (específicamente, navegación de drones). 
+El proyecto **SplineSim** es una suite interactiva dual (Desktop Python Tkinter y Web HTML5/Canvas/JS) diseñada para resolver el problema clásico de la planificación de trayectorias suaves en física e ingeniería (navegación de drones, diseño de montañas rusas y modelado climatológico). 
 
 En el ámbito físico, unir puntos de control (waypoints) utilizando interpolación lineal simple genera cambios bruscos en la velocidad en cada nodo (discontinuidad de la primera derivada), lo cual requeriría fuerza infinita instantánea de los motores ($F = m \cdot a$) y causaría vibraciones mecánicas dañinas. Las splines cuadráticas corrigen esto logrando continuidad en la velocidad ($C^1$), pero la aceleración (segunda derivada) mantiene saltos discretos (sacudidas instantáneas). 
 
-**SplineFly** implementa **Splines Cúbicos Naturales**, garantizando continuidad de clase $C^2$ (posición, velocidad $y'(x)$ y aceleración $y''(x)$ continuas en todo el dominio). Esto permite que el dron navegue de forma físicamente fluida, amortiguando esfuerzos mecánicos y asegurando un despegue y aterrizaje suaves mediante las condiciones de frontera naturales ($S''(x_0) = S''(x_n) = 0$).
+**SplineSim** implementa **Splines Cúbicos Naturales**, garantizando continuidad de clase $C^2$ (posición, velocidad $y'(x)$ y aceleración $y''(x)$ continuas en todo el dominio). Esto permite que el dron navegue de forma físicamente fluida, amortiguando esfuerzos mecánicos y asegurando un despegue y aterrizaje suaves mediante las condiciones de frontera naturales ($S''(x_0) = S''(x_n) = 0$).
 
 ```mermaid
 graph TD
@@ -47,7 +47,7 @@ Al tratarse de una aplicación matemática interactiva enfocada en la simulació
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "SplineFlyMissionData",
+  "title": "SplineSimMissionData",
   "type": "object",
   "properties": {
     "waypoints": {

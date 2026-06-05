@@ -307,6 +307,7 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
+    min-height: 120px;
 }
 
 .canvas-title {
@@ -317,9 +318,14 @@ body {
 }
 
 .sub-canvas-box canvas {
-    position: relative;
-    flex: 1;
-    width: 100%;
+    position: absolute;
+    top: 26px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 34px);
+    display: block;
 }
 
 /* =========================================================================
@@ -814,6 +820,82 @@ tr:last-child td {
 }
 
 .exp-col.highlighted p {
+    color: var(--fg-normal);
+}
+
+/* =========================================================================
+   NAVEGACIÓN INTERNA DE SUB-APLICACIONES (DRON, MONTAÑA RUSA, CLIMA)
+   ========================================================================= */
+
+.apps-nav-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    background: rgba(17, 24, 39, 0.6);
+    padding: 0.35rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    width: max-content;
+}
+
+.app-sub-btn {
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: var(--fg-muted);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: calc(var(--radius-md) - 4px);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.app-sub-btn:hover {
+    color: var(--fg-light);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.app-sub-btn.active {
+    color: var(--fg-light);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sub-app-container {
+    display: none;
+}
+
+.sub-app-container.active {
+    display: block;
+    animation: fadeInSub 0.3s ease-out;
+}
+
+@keyframes fadeInSub {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.coaster-controls-card, .weather-controls-card {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.switch-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.switch-container .checkbox-label {
+    font-size: 0.8rem;
+    font-weight: 500;
     color: var(--fg-normal);
 }
 
